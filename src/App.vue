@@ -1,7 +1,6 @@
 <template>
   <div class="app">
-    <h1>黑马头条</h1>
-    <router-view></router-view>
+    <router-view />
   </div>
 </template>
 
