@@ -1,7 +1,7 @@
 /* 
 用户相关请求模块
 */
-import request from './request'
+import request from '@/utils/request'
 //登录
 export const loginAPI = data => {
   return request({
@@ -16,5 +16,23 @@ export const sendSmsAPI = mobile => {
   return request({
     method: 'GET',
     url: `/v1_0/sms/codes/${mobile}`,
+  })
+}
+//获取用户自己的信息
+export const getUserInfo = () => {
+  return request({
+    method: 'GET',
+    url: `/v1_0/user`,
+    //请求头数据，权限接口，统一设置到请求拦截器里面
+    // headers: {
+    //   Authorization: `Bearer ${store.state.user.token}`,
+    // },
+  })
+}
+//获取用户频道列表
+export const getUserChannels = () => {
+  return request({
+    method: 'GET',
+    url: `/v1_0/user/channels`,
   })
 }

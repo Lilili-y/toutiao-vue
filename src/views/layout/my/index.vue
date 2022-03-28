@@ -4,26 +4,26 @@
     <div v-if="user" class="header userInfo">
       <div class="base-info">
         <div class="left">
-          <van-image class="avatar" src="https://img01.yzcdn.cn/vant/cat.jpeg" round fit="cover" />
-          <span class="name">李梨鲤</span>
+          <van-image class="avatar" :src="userInfo.photo" round fit="cover" />
+          <span class="name">{{ userInfo.name }}</span>
         </div>
         <div class="right"><van-button type="default" size="mini" round>编辑资料</van-button></div>
       </div>
       <div class="data-stats">
         <div class="data-item">
-          <span class="count">10</span>
+          <span class="count">{{ userInfo.art_count }}</span>
           <span class="text">头条</span>
         </div>
         <div class="data-item">
-          <span class="count">9</span>
+          <span class="count">{{ userInfo.follow_count }}</span>
           <span class="text">关注</span>
         </div>
         <div class="data-item">
-          <span class="count">10</span>
+          <span class="count">{{ userInfo.fans_count }}</span>
           <span class="text">粉丝</span>
         </div>
         <div class="data-item">
-          <span class="count">10</span>
+          <span class="count">{{ userInfo.like_count }}</span>
           <span class="text">获赞</span>
         </div>
       </div>
@@ -60,10 +60,22 @@
 
 <script>
 import { mapState } from 'vuex'
+import { getUserInfo } from '@/api/user'
 export default {
   name: 'MyIndex',
+  data() {
+    return {
+      userInfo: {}, //用户信息
+    }
+  },
   computed: {
     ...mapState(['user']),
+  },
+  created() {
+    //获取用户信息
+    if (this.user) {
+      this.loadUserInfo()
+    }
   },
   methods: {
     //退出登录
@@ -73,11 +85,21 @@ export default {
           title: '确认退出吗？',
         })
         .then(() => {
+          //清除token
           this.$store.commit('setUser', null)
         })
         .catch(() => {
           // on cancel
         })
+    },
+    async loadUserInfo() {
+      try {
+        const res = await getUserInfo()
+        this.userInfo = res.data.data
+        console.log(this.userInfo)
+      } catch (error) {
+        this.$toast('获取个人信息失败，请稍后重试！')
+      }
     },
   },
 }

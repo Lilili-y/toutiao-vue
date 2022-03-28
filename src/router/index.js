@@ -11,7 +11,7 @@ const routes = [
   },
   {
     path: '/',
-    name: 'layout',
+    // name: 'layout',  //  不省略会有警告
     component: () => import('@/views/layout'),
     children: [
       {
