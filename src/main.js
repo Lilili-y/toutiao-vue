@@ -8,7 +8,9 @@ import 'amfe-flexible'
 import Vant from 'vant'
 import 'vant/lib/index.css'
 import '@/styles/index.less'
+import '@/utils/dayjs'
 Vue.use(Vant)
+Vue.filter()
 new Vue({
   router,
   store,
