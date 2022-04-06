@@ -27,6 +27,7 @@
 <script>
 import { getArticles } from '@/api/article'
 import ArticleItem from '@/components/article-item/index.vue'
+
 export default {
   name: 'ArticleList',
   props: {

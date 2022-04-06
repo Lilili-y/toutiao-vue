@@ -17,24 +17,35 @@ const routes = [
       {
         path: '', //空表示默认路由
         name: 'home',
-        component: () => import('@/views/layout/home'),
+        component: () => import('@/views/home'),
       },
       {
         path: '/qa',
         name: 'qa',
-        component: () => import('@/views/layout/qa'),
+        component: () => import('@/views/qa'),
       },
       {
         path: '/video',
         name: 'video',
-        component: () => import('@/views/layout/video'),
+        component: () => import('@/views/video'),
       },
       {
         path: '/my',
         name: 'my',
-        component: () => import('@/views/layout/my'),
+        component: () => import('@/views/my'),
       },
     ],
+  },
+  {
+    path: '/search',
+    name: 'search',
+    component: () => import('@/views/search'),
+  },
+  {
+    path: '/article/:articleId',
+    name: 'article',
+    component: () => import('@/views/article'),
+    props: true, //开启props传参，将动态路由参数映射到组件的props中
   },
 ]
 
